@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import {
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../Utils/Firebase/firebase.utils";
 import FormInput from "../Form-input/Form-input.component";
 import "./sign-in-form.styles.scss";
 import Button from "../Button/button.component";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
 const defaultFormField = {
   email: "",
@@ -35,7 +33,6 @@ const SignInForm = () => {
         email,
         password
       );
-      console.log(response);
       resetForm();
     } catch (error) {
       if (error.code === "auth/user-not-found") {
@@ -47,8 +44,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   return (

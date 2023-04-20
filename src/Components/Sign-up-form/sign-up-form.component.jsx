@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -22,7 +22,6 @@ const SignUpForm = () => {
     const { name, value } = e.target;
     console.log(name);
     setFormField({ ...formField, [name]: value });
-    // console.log(formField);
   };
 
   const resetForm = () => {
