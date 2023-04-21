@@ -21,7 +21,15 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    // overflow-y: scroll;
+    overflow-y: scroll;
+  }
+  .cart-items::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  .cart-items::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    // outline: 1px solid slategrey;
   }
 
   button {

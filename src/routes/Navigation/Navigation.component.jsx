@@ -6,10 +6,10 @@ import { UserContext } from "../../Contexts/user.context";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
 import CardIcon from "../../Components/Card-icon/card-icon.component";
 import CartDropdown from "../../Components/Cart-dropdown/cart-dropdown.component";
-import { DropdownContext } from "../../Contexts/dropdown.context";
+import { CartContext } from "../../Contexts/cart.context";
 const Navigation = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(DropdownContext);
+  const { isCartOpen } = useContext(CartContext);
   const handleSignOut = () => {
     signOutUser();
     setCurrentUser(null);
