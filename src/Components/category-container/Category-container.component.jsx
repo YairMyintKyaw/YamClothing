@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import CategoryItem from "../Category-item/Category-item.component";
 import { CategoriesContainer } from "./categories-container.styles";
 
