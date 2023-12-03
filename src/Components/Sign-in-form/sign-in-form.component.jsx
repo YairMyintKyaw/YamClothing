@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import {
   signInAuthUserWithEmailAndPassword,
@@ -7,6 +7,11 @@ import {
 import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/button.component";
 import { ButtonContainer, SignUpContainer } from "./sign-in-form.styles";
+import { useDispatch } from "react-redux";
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../store/user/user.action";
 
 const defaultFormField = {
   email: "",
@@ -16,6 +21,7 @@ const defaultFormField = {
 const SignInForm = () => {
   const [formField, setFormField] = useState(defaultFormField);
   const { email, password } = formField;
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,10 +35,7 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(emailSignInStart(email, password));
       resetForm();
     } catch (error) {
       if (error.code === "auth/user-not-found") {
@@ -44,7 +47,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    dispatch(googleSignInStart());
   };
 
   return (

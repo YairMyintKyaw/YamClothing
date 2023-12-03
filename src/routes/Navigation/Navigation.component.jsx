@@ -1,25 +1,25 @@
-import React, { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ReactComponent as CrownSvg } from "../../assets/crown.svg";
-import { UserContext } from "../../Contexts/user.context";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
 import CardIcon from "../../Components/Card-icon/card-icon.component";
 import CartDropdown from "../../Components/Cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../Contexts/cart.context";
 import {
   LogoContainer,
   NavLink,
   NavLinkContainer,
   NavigationContainer,
 } from "./navigation.styles.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser, signOutStart } from "../../store/user/user.action";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { CartCondition } from "../../store/cart/cart.selector";
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartContext);
-  const handleSignOut = () => {
-    signOutUser();
-    setCurrentUser(null);
-  };
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+  const isCartOpen = useSelector(CartCondition);
+
+  const handleSignOut = () => dispatch(signOutStart());
 
   return (
     <>
