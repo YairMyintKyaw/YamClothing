@@ -1,4 +1,4 @@
-import CategoryItem from "../Category-item/Category-item.component";
+import CategoryItem from "../category-item/Category-item.component";
 import { CategoriesContainer } from "./categories-container.styles";
 
 const categories = [
