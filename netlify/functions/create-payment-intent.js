@@ -4,8 +4,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   try {
-    const { amount } = JSON.parse(event.data);
-    console.log(amount);
+    const { amount } = JSON.parse(event.body);
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
@@ -17,12 +17,11 @@ exports.handler = async (event) => {
       body: JSON.stringify({ paymentIntent }),
     };
   } catch (error) {
-    console.log({ error });
-    console.log("thwy");
+    console.error("Error:", error);
 
     return {
       statusCode: 400,
-      body: JSON.stringify({ error }),
+      body: JSON.stringify({ error: error.message || "An error occurred" }),
     };
   }
 };
